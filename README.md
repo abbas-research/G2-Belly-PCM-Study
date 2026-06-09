@@ -8,6 +8,30 @@ This study investigates the thermal performance of a volume-matched non-uniform 
 
 Results indicate that redistribution of PCM toward the central region increased both average and maximum battery temperatures relative to the uniform PCM configuration, demonstrating that PCM spatial distribution significantly influences thermal management effectiveness.
 
+## Geometry
+
+<p align="center">
+  <img src="Geometry/Belly%20PCM%20Geom.png" width="700">
+</p>
+
+*Figure 1. G2 Belly PCM geometry with volume-matched central PCM expansion.*
+
+## Computational Mesh
+
+<p align="center">
+  <img src="Mesh/Pictures/Belly%20PCM%20Iso%20View.png" width="700">
+</p>
+
+*Figure 2. Tetrahedral computational mesh used for transient thermal simulation.*
+
+## PCM Temperature Distribution
+
+<p align="center">
+  <img src="Results/PCM%20Contour.png" width="700">
+</p>
+
+*Figure 3. Temperature contour of the PCM domain after 1000 s. Cooler PCM is concentrated in the central belly region while elevated temperatures develop near the battery ends.*
+
 ---
 
 ## Research Objective
