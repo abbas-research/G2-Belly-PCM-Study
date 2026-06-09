@@ -13,7 +13,6 @@ Results indicate that redistribution of PCM toward the central region increased 
 <p align="center">
   <img src="Geometry/Belly%20PCM%20Geom.png" width="700">
 </p>
-
 *Figure 1. G2 Belly PCM geometry with volume-matched central PCM expansion.*
 
 ## Computational Mesh
@@ -21,7 +20,6 @@ Results indicate that redistribution of PCM toward the central region increased 
 <p align="center">
   <img src="Mesh/Pictures/Belly%20PCM%20Iso%20View.png" width="700">
 </p>
-
 *Figure 2. Tetrahedral computational mesh used for transient thermal simulation.*
 
 ## PCM Temperature Distribution
@@ -29,8 +27,23 @@ Results indicate that redistribution of PCM toward the central region increased 
 <p align="center">
   <img src="Results/PCM%20Contour.png" width="700">
 </p>
-
 *Figure 3. Temperature contour of the PCM domain after 1000 s. Cooler PCM is concentrated in the central belly region while elevated temperatures develop near the battery ends.*
+
+## Temperature History
+
+### Average Battery Temperature
+
+<p align="center">
+  <img src="Plots/Volume_avg-Temp%20plot.png" width="700">
+</p>
+*Figure 4. Transient evolution of volume-averaged battery temperature during the 1000 s simulation.*
+
+### Maximum Battery Temperature
+
+<p align="center">
+  <img src="Plots/battery_max_temp%20plot.png" width="700">
+</p>
+*Figure 5. Transient evolution of maximum battery temperature during the 1000 s simulation.*
 
 ## Key Results
 
