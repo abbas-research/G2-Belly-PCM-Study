@@ -32,6 +32,18 @@ Results indicate that redistribution of PCM toward the central region increased 
 
 *Figure 3. Temperature contour of the PCM domain after 1000 s. Cooler PCM is concentrated in the central belly region while elevated temperatures develop near the battery ends.*
 
+## Key Results
+
+| Case | Average Temperature (K) | Maximum Temperature (K) |
+|--------|--------|--------|
+| Baseline Uniform PCM Jacket | 302.134 | 302.169 |
+| G2 Belly PCM Geometry | 304.242 | 304.585 |
+
+| Performance Metric | Change Relative to Baseline |
+|--------|--------|
+| Average Temperature | +2.108 K |
+| Maximum Temperature | +2.416 K |
+
 ---
 
 ## Research Objective
