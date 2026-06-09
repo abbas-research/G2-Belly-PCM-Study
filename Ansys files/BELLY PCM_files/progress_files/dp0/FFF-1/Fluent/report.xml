@@ -1,0 +1,237 @@
+<FluentXMLReport>
+<version>
+Fluent
+Version: 3d, dp, pbns, lam, transient (3d, double precision, pressure-based, laminar, transient)
+Release: 26.1.0
+Title: 
+</version>
+
+<Models>
+
+Models
+------
+
+   Model                        Settings                       
+   ---------------------------------------------------------
+   Space                        3D                             
+   Time                         Unsteady, 1st-Order Implicit   
+   Viscous                      Laminar                        
+   Heat Transfer                Enabled                        
+   Solidification and Melting   Enabled                        
+   Radiation                    None                           
+   Species                      Disabled                       
+   Coupled Dispersed Phase      Disabled                       
+   NOx Pollutants               Disabled                       
+   SOx Pollutants               Disabled                       
+   Soot                         Disabled                       
+   Mercury Pollutants           Disabled                       
+   Structure                    Disabled                       
+   Acoustics                    Disabled                       
+   Eulerian Wall Film           Disabled                       
+   Potential/Electrochemistry   Disabled                       
+   Multiphase                   Disabled                       
+
+</Models>
+
+<MaterialProperties>
+Material Properties
+-------------------
+
+   Material: battery (solid)
+
+      Property               Units      Method     Value(s)   
+      -----------------------------------------------------
+      Density                kg/m^3     constant   2092       
+      Cp (Specific Heat)     J/(kg K)   constant   678        
+      Thermal Conductivity   W/(m K)    constant   18.2       
+
+   Material: n-octadecane (fluid)
+
+      Property                    Units      Method     Value(s)   
+      ----------------------------------------------------------
+      Density                     kg/m^3     constant   770        
+      Cp (Specific Heat)          J/(kg K)   constant   2196       
+      Thermal Conductivity        W/(m K)    constant   0.148      
+      Viscosity                   kg/(m s)   constant   0.003      
+      Pure Solvent Melting Heat   J/kg       constant   243500     
+      Solidus Temperature         K          constant   298.15     
+      Liquidus Temperature        K          constant   302.15     
+
+   Material: air (fluid)
+
+      Property                    Units      Method     Value(s)     
+      ------------------------------------------------------------
+      Density                     kg/m^3     constant   1.225        
+      Cp (Specific Heat)          J/(kg K)   constant   1006.43      
+      Thermal Conductivity        W/(m K)    constant   0.0242       
+      Viscosity                   kg/(m s)   constant   1.7894e-05   
+      Pure Solvent Melting Heat   J/kg       constant   0            
+      Solidus Temperature         K          constant   0            
+      Liquidus Temperature        K          constant   0            
+
+   Material: aluminum (solid)
+
+      Property               Units      Method     Value(s)   
+      -----------------------------------------------------
+      Density                kg/m^3     constant   2719       
+      Cp (Specific Heat)     J/(kg K)   constant   871        
+      Thermal Conductivity   W/(m K)    constant   202.4      
+
+</MaterialProperties>
+
+<CellZoneConditions>
+Cell Zone Conditions
+--------------------
+
+   Zones
+
+      name             id   type    material       
+      ------------------------------------------
+      part-belly_pcm   6    fluid   n-octadecane   
+      part-battery     7    solid   battery        
+
+   Setup Conditions
+
+      part-belly_pcm
+
+         Condition       Value          
+         ----------------------------
+         Material Name   n-octadecane   
+         Frame Motion?   no             
+         Mesh Motion?    no             
+
+      part-battery
+
+         Condition               Value                                                         
+         -----------------------------------------------------------------------------------
+         Material Name           battery                                                       
+         Specify source terms?   yes                                                           
+         Source Terms            ((energy ((constant . 65000) (inactive . #f) (profile  ))))   
+         Frame Motion?           no                                                            
+         Mesh Motion?            no                                                            
+
+</CellZoneConditions>
+
+<BoundaryConditions>
+Boundary Conditions
+-------------------
+
+   Zones
+
+      name                                      id   type   
+      ---------------------------------------------------
+      wall-part-belly_pcm                       1    wall   
+      wall-part-battery                         2    wall   
+      wall-part-battery-part-belly_pcm          3    wall   
+      wall-part-battery-part-belly_pcm-shadow   9    wall   
+
+   Setup Conditions
+
+      wall-part-belly_pcm
+
+         Condition                                          Value             
+         ------------------------------------------------------------------
+         Material Name                                      aluminum          
+         Thermal BC Type                                    Convection        
+         Convective Heat Transfer Coefficient [W/(m^2 K)]   7                 
+         Free Stream Temperature [K]                        298.15            
+         Wall Motion                                        Stationary Wall   
+         Shear Boundary Condition                           No Slip           
+
+      wall-part-battery
+
+         Condition         Value       
+         ---------------------------
+         Material Name     aluminum    
+         Thermal BC Type   Heat Flux   
+
+      wall-part-battery-part-belly_pcm
+
+         Condition                  Value             
+         ------------------------------------------
+         Material Name              aluminum          
+         Thermal BC Type            Coupled           
+         Wall Motion                Stationary Wall   
+         Shear Boundary Condition   No Slip           
+
+      wall-part-battery-part-belly_pcm-shadow
+
+         Condition         Value      
+         --------------------------
+         Material Name     aluminum   
+         Thermal BC Type   Coupled    
+
+</BoundaryConditions>
+
+<SolverSettings>
+Solver Settings
+---------------
+
+   Equations
+
+      Equation   Solved   
+      -----------------
+      Flow       yes      
+      Energy     yes      
+
+   Numerics
+
+      Numeric                         Enabled   
+      ---------------------------------------
+      Absolute Velocity Formulation   yes       
+
+   Unsteady Calculation Parameters
+
+                                        
+      -------------------------------
+      Number of Time Steps       1000   
+      Time Step Size [s]         1      
+      Max Iterations/Time Step   22     
+
+   Under-Relaxation Factors
+
+      Variable                 Relaxation Factor   
+      ------------------------------------------
+      Pressure                 0.3                 
+      Density                  1                   
+      Body Forces              1                   
+      Momentum                 0.7                 
+      Liquid Fraction Update   0.9                 
+      Energy                   1                   
+
+   Linear Solver
+
+      Variable     Solver Type   Termination Criterion   Residual Reduction Tolerance   
+      -------------------------------------------------------------------------------
+      Pressure     V-Cycle       0.1                                                    
+      X-Momentum   Flexible      0.1                     0.7                            
+      Y-Momentum   Flexible      0.1                     0.7                            
+      Z-Momentum   Flexible      0.1                     0.7                            
+      Energy       F-Cycle       0.1                                                    
+
+   Pressure-Velocity Coupling
+
+      Parameter   Value    
+      ------------------
+      Type        SIMPLE   
+
+   Discretization Scheme
+
+      Variable   Scheme                
+      ------------------------------
+      Pressure   Second Order          
+      Momentum   Second Order Upwind   
+      Energy     Second Order Upwind   
+
+   Solution Limits
+
+      Quantity                         Limit   
+      --------------------------------------
+      Minimum Absolute Pressure [Pa]   1       
+      Maximum Absolute Pressure [Pa]   5e+10   
+      Minimum Static Temperature [K]   1       
+      Maximum Static Temperature [K]   5000    
+
+</SolverSettings>
+
+</FluentXMLReport>

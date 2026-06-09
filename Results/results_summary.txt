@@ -1,0 +1,23 @@
+G2 Belly PCM Study
+
+Battery Volume = 1.651529e-05 m³
+PCM Volume = 5.969879e-06 m³
+
+Nodes = 36587
+Elements = 201848
+
+Heat Generation = 65000 W/m³
+Ambient Temperature = 298.15 K
+Convection Coefficient = 7 W/m²K
+
+Simulation Time = 1000 s
+Time Step = 1 s
+
+Average Battery Temperature = 304.24194 K
+Maximum Battery Temperature = 304.58501 K
+
+Baseline Average Temperature = 302.13410 K
+Baseline Maximum Temperature = 302.16900 K
+
+Average Increase = 2.10784 K
+Maximum Increase = 2.41601 K
